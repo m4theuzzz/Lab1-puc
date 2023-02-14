@@ -38,12 +38,33 @@ Como secretária da universidade eu devo poder gerar curriculo para cada semestr
 - O sistema cria os curriculos semestrais para os cursos.
 
 
-## História de Secretáriar: Criar
-....
+## História de Secretáriar: Monitorar Disciplinas
+Como secretária da universidade eu devo poder visualizar quais disciplinas estão sendo ofertadas, assim como ver se estão disponíveis para matrícula.
 ### Requisitos
-....
+- O sistema permite visualizar as disciplinas ofertadas e suas meta informações
+
 ### Critérios de Aceitação
-....
+- O sistema mostra as disciplinas e suas turmas
+
+## História de Secretáriar: Monitorar Professores
+Como secretária da universidade eu devo poder visualizar quais professores estão lecionando cada matéria.
+### Requisitos
+- O sistema deve permitir a visualização dos professores credenciados na universidade
+
+### Critérios de Aceitação
+- O sistema lista todos os professores credenciados e suas informações.
+
+## História de Secretáriar: Monitorar Alunos
+Como secretária da universidade devo poder visualizar todos os alunos matriculados e suas informações pessoais, assim como seus dados relacionados ao contrato com a instituição.
+### Requisitos
+- O sistema deve permitir listar todos os alunos e acessar seus dados
+
+### Critérios de Aceitação
+- O sistema deve permitir inserção de dados pessoais dos alunos
+
+- O sistema deve permitir inserção de dados de contrato dos alunos
+
+- O sistema dee permitir a visualização dessas informações
 
 
 ## História de Secretária: Monitorar matrículas
@@ -79,4 +100,3 @@ Como aluno eu espero poder cancelar as matriculas nas disciplinas obrigatórias 
 ### Critérios de Aceitação
 - O sistema valida o periodo de cancelamento de matrícula.
 - O sistema permite o cancelamento das matrículas nas disiplinas obrigatórias e opcionais.
-
