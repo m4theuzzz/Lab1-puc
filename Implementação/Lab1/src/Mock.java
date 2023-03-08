@@ -15,8 +15,8 @@ public class Mock {
         User mockSecretary2 = new Secretary("secretaria@pucmail.com", "123456");
         User mockStudent1 = new Student("estudante@pucmail.com", "123456", 1);
         User mockStudent2 = new Student("estudante@pucmail.com", "123456", 2);
-        User mockTeacher1 = new Teacher("professor@pucmail.com", "123456");
-        User mockTeacher2 = new Teacher("professor@pucmail.com", "123456");
+        User mockTeacher1 = new Teacher("professor@pucmail.com", "123456", "fisica");
+        User mockTeacher2 = new Teacher("professor@pucmail.com", "123456", "matematica");
 
         mockUsers.add(mockSecretary1);
         mockUsers.add(mockSecretary2);

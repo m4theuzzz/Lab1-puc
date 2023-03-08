@@ -15,7 +15,7 @@ public class Secretary extends User {
     }
 
     public List<Teacher> getTeachers() {
-        return List.of(new Teacher("", ""));
+        return List.of(new Teacher("", "", ""));
     }
 
     public List<Student> getStudents() {
