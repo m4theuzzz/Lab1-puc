@@ -1,8 +1,11 @@
 import java.util.*;
 
 public class Teacher extends User {
-    Teacher(String email, String password) {
+    public final String subject;
+
+    Teacher(String email, String password, String subject) {
         super(email, password);
+        this.subject = subject;
     }
 
     public List<Student> getRegisteredStudents(int class_id){

@@ -1,7 +1,9 @@
+import java.util.List;
 import java.util.Scanner;
-
 public class Main {
-    public static void main(String[] args) {
+    public static void main (String[] args) {
+        List<User> users = new Mock().generateMockUsers();
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Digite o email: ");
@@ -12,6 +14,6 @@ public class Main {
 
         User toLog = new User(email, password);
 
-        toLog.login();
+        toLog.login(users);
     }
 }
