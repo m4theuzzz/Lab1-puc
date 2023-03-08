@@ -1,3 +1,4 @@
+import java.util.*;
 public class Classes {
     private int id;
     private int registeredStudents;

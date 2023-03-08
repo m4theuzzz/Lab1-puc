@@ -1,3 +1,5 @@
+import java.util.*;
+
 class User {
         private int id;
         private String email;

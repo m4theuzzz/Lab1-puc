@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Grade {
     private int id;
     private List<Classes> mandatoryClasses;
