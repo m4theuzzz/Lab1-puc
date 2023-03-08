@@ -2,29 +2,41 @@ import java.util.*;
 
 public class Main {
 
-    public static List<User> generateMockUsers() {
-        List<User> mockUsers = new ArrayList<User>();
+    public static void globalMenu(String type) {
+        switch (type) {
+            case "student":
+                System.out.println("Bem vindo(a), estudante. Escolha uma opção:");
+                System.out.println("1 - Fazer novo registro");
+                System.out.println("2 - Cancelar registro");
+                System.out.println("3 - Listar registros");
+                break;
+            case "secretary":
+                System.out.println("Bem vindo(a), secretário(a). Escolha uma opção:");
+                System.out.println("1 - Listar professores");
+                System.out.println("2 - Listas estudantes");
+                System.out.println("3 - Listar matérias");
+                System.out.println("4 - Listar matrículas");
+                System.out.println("5 - Montar grade");
+                break;
+            case "teacher":
+                System.out.println("Bem vindo(a), professor(a). Escolha uma opção:");
+                System.out.println("1 - Listar estudantes matriculados em minha disciplina");
+                break;
 
-        User mockSecretary1 = new Secretary("secretaria@pucmail.com", "123456");
-        User mockSecretary2 = new Secretary("secretaria@pucmail.com", "123456");
-        User mockStudent1 = new Student("estudante@pucmail.com", "123456", 1);
-        User mockStudent2 = new Student("estudante@pucmail.com", "123456", 2);
-        User mockTeacher1 = new Teacher("professor@pucmail.com", "123456");
-        User mockTeacher2 = new Teacher("professor@pucmail.com", "123456");
+        }
+    }
 
-        mockUsers.add(mockSecretary1);
-        mockUsers.add(mockSecretary2);
-        mockUsers.add(mockStudent1);
-        mockUsers.add(mockStudent2);
-        mockUsers.add(mockTeacher1);
-        mockUsers.add(mockTeacher2);
+    public static void studentMenu(int option) {
+        switch (option) {
+            case 1:
 
-        return mockUsers;
-
+        }
     }
 
     public static void main(String[] args) {
-        List a = generateMockUsers();
+
+        System.out.println("BEM VINDO AO SISTEMA DE MATRÍCULAS - MATRICOOLY");
+        System.out.println("");
 
         System.out.println(a.toString());
     }
