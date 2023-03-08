@@ -26,7 +26,7 @@ public class Student extends User {
         return true;
     }
 
-    public boolean validateOptionalRegistries(grade_id) {
+    public boolean validateOptionalRegistries(int grade_id) {
         return true;
     }
 

@@ -12,6 +12,7 @@ class User {
         }
 
         public void login() {
+
         }
 
         public User getUser() {
