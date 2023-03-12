@@ -1,8 +1,7 @@
-import java.util.*;
 public class Billing {
-    private int id;
-    private double price;
-    private int student_id;
+    protected int id;
+    protected double price;
+    protected int student_id;
 
     Billing(int id, double price, int student_id) {
         this.id = id;
@@ -10,10 +9,14 @@ public class Billing {
         this.student_id = student_id;
     }
 
-    public void sendBill() {
+    public static Billing getById(int id) {
+        return Database.Billings.stream()
+                .filter(billing -> billing.id == id)
+                .toList().get(0);
     }
 
-    public Billing getBilling() {
-        return this;
+    public void sendBill() {
+        // send bill by email or something.
     }
+
 }

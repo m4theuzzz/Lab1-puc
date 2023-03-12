@@ -1,21 +1,17 @@
-import java.util.*;
-
 public class Registry {
-    private int id;
-    private int class_id;
-    private int student_id;
-    private Date startDate;
-    private Date endDate;
+    protected int id;
+    protected int subject_id;
+    protected int student_id;
 
-    Registry(int id, int class_id, int student_id, Date startDate, Date endDate) {
+    Registry(int id, int subject_id, int student_id) {
         this.id = id;
-        this.class_id = class_id;
+        this.subject_id = subject_id;
         this.student_id = student_id;
-        this.startDate = startDate;
-        this.endDate = endDate;
     }
 
-    public Registry getRegistry() {
-        return this;
+    public static Registry getById(int id) {
+        return Database.Registries.stream()
+                .filter(registry -> registry.id == id)
+                .toList().get(0);
     }
 }

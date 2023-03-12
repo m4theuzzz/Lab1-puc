@@ -1,30 +1,37 @@
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
 
 class User {
-        private int id;
-        private final String email;
-        private final String password;
+        protected int id;
+        protected String name;
+        protected final String email;
+        private String password = null;
 
-        User(String email, String password) {
+        User(int id, String name, String email, String password) {
+                this.id = id;
+                this.name = name;
                 this.email = email;
                 this.password = password;
         }
 
-        public User login(List<User> users) throws Error {
-                final User[] result = {null};
-
-                users.forEach(user -> {
-                        if (Objects.equals(user.email, this.email) && Objects.equals(user.password, this.password)) {
-                                result[0] = user;
-                        }
-                });
-
-                return result[0];
+        User(int id, String name, String email) {
+                this.id = id;
+                this.name = name;
+                this.email = email;
         }
 
-        public User getUser() {
-                return this;
+        public static User login(String email, String password) throws Exception {
+                List<User> found = Database.Users.stream().filter(user -> {
+                        if (Objects.equals(user.email, email) && Objects.equals(user.password, password)) {
+                                return true;
+                        }
+                        return false;
+                }).toList();
+
+                if (found.size() == 0) {
+                        throw new Exception("Incorrect email or password.");
+                }
+
+                return found.get(0);
         }
 }
