@@ -16,7 +16,8 @@ public class Billing {
     }
 
     public void sendBill() {
-        // send bill by email or something.
+        Student student = Student.getById(this.student_id);
+        System.out.println(student.id + " - " + student.name + " = R$" + this.price);
     }
 
 }

@@ -37,7 +37,7 @@ public class Main {
                 System.out.println("2 - Listas estudantes");
                 System.out.println("3 - Listar matérias");
                 System.out.println("4 - Listar matrículas");
-                System.out.println("5 - Montar grade");
+                System.out.println("5 - Enviar cobrança para aluno");
                 System.out.println("6 - Log Out");
                 option = scanner.nextInt();
                 scanner.nextLine();
@@ -190,6 +190,16 @@ public class Main {
                     System.out.println(
                             ANSI_GREEN + student.name + " <-> " + subject.name + ANSI_RESET);
                 });
+
+                System.out.println("");
+                System.out.println("Pressione Enter para Voltar");
+                System.in.read();
+
+                break;
+            case 5:
+                System.out.println("Enviando cobranças");
+
+                loggedSecretary.sendStudentsBill();
 
                 System.out.println("");
                 System.out.println("Pressione Enter para Voltar");

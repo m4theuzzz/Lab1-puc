@@ -67,7 +67,7 @@ public class Secretary extends User {
     }
 
     public void sendStudentsBill() {
-        Database.Users.stream().filter(user -> user.getClass() == Student.class).forEach(student -> {
+        Database.Users.stream().filter(user -> user.getClass() == Student.class).map(user -> (Student) user).forEach(student -> {
             Billing bill = this.buildRegistryBill(student.id);
             bill.sendBill();
         });
@@ -91,22 +91,6 @@ public class Secretary extends User {
             sum += (subject.hours * subject.hourPrice);
         }
         return sum;
-    }
-
-    public void buildGrade(List<Integer> mandatory, List<Integer> optional, int period) throws Exception {
-        if(validateGradeSubjects(mandatory, optional, period)){
-            int id = Database.Grades.get(Database.Grades.size() - 1).id + 1;
-            Grade newGrade = new Grade(id, mandatory, optional, period);
-            Database.Grades.add(newGrade);
-        }
-    }
-
-    public void updateGrade(int id, List<Integer> mandatory, List<Integer> optional, int period) throws Exception {
-        if (validateGradeSubjects(mandatory, optional, period)) {
-            int index = Database.Grades.stream().map(grade -> grade.id).toList().indexOf(id);
-            Grade newGrade = new Grade(id, mandatory, optional, period);
-            Database.Grades.set(index, newGrade);
-        }
     }
 
     private boolean validateGradeSubjects(List<Integer> mandatory, List<Integer> optional, int period) throws Exception {
