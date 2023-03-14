@@ -18,16 +18,7 @@ public class Teacher extends User {
     }
 
     public List<Student> getRegisteredStudents(int subject_id) {
-        List<Registry> registries = Database.Registries.stream().filter(registry -> registry.subject_id == subject_id).toList();
-        List<Integer> studentIds = registries.stream().map(registry -> registry.student_id).toList();
-        List<Student> allStudents = (List<Student>) Database.Users.stream().filter(user -> user.getClass() == Student.class);
-        return allStudents.stream().filter(student -> {
-            if (studentIds.contains(student.id)) {
-                return true;
-            }
-            return false;
-        }).toList();
+        Subject subject = Subject.getById(subject_id);
+        return subject.getRegisteredStudents().stream().map(Student::getById).toList();
     }
-
-
 }

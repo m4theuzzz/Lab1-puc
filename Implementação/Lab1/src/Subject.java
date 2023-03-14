@@ -47,13 +47,11 @@ public class Subject {
         if (this.registered_students.size() == 60) {
             throw new Exception("This subject can't accept new registries.");
         }
-
-        int found = this.registered_students.indexOf(student_id);
-        if (found == -1) {
-            this.registered_students.add(student_id);
-        } else {
-            throw new Exception("Student is already registered in this subject.");
+        if (this.isStudentRegistered(student_id)) {
+            throw new Exception("You're already registered for this subject.");
         }
+
+        this.registered_students.add(student_id);
     }
 
     public void rmStudent(int student_id) throws Exception {

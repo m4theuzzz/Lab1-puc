@@ -28,6 +28,7 @@ public class Main {
                 System.out.println("1 - Fazer novo registro");
                 System.out.println("2 - Cancelar registro");
                 System.out.println("3 - Listar registros");
+                System.out.println("6 - Log Out");
                 option = scanner.nextInt();
                 studentMenu(option);
             } else if (loggedSecretary != null) {
@@ -44,19 +45,17 @@ public class Main {
             } else if (loggedTeacher != null) {
                 System.out.println("Bem vindo(a), professor(a). Escolha uma opção:");
                 System.out.println("1 - Listar estudantes matriculados em minha disciplina");
+                System.out.println("6 - Log Out");
                 option = scanner.nextInt();
                 scanner.nextLine();
                 teacherMenu(option);
             }
-
-            System.out.println("Digite 0 para sair ou 9 para uma nova opção");
         }
 
         System.out.println("Obrigado e volte sempre! =)");
-
     }
 
-    public static void studentMenu(int option) {
+    public static void studentMenu(int option) throws IOException {
         switch (option) {
             case 1:
                 System.out.println("Novo registro de matrícula em matéria");
@@ -70,31 +69,67 @@ public class Main {
                                 ANSI_YELLOW + subject.id + " - " + subject.name + " (out of registry period)"
                                         + ANSI_RESET);
                     }
-
                 });
                 System.out.println("Escolha o ID da matéria");
                 int subjectId = scanner.nextInt();
                 scanner.nextLine();
-                loggedStudent.makeRegistry(subjectId);
-                System.out.println("Registro feito com sucesso!");
+                try {
+                    loggedStudent.makeRegistry(subjectId);
+                    System.out.println(ANSI_GREEN + "Registro feito com sucesso!" + ANSI_RESET);
+                } catch (Exception err) {
+                    System.out.println(ANSI_RED + err.getMessage() + ANSI_RESET);
+                }
 
+                System.out.println("");
+                System.out.println("Pressione Enter para Voltar");
+                System.in.read();
+                break;
             case 2:
-                System.out.println("Cancelar registro");
-                System.out.println("Escolha o ID do registro");
+                System.out.println("Cancelar matrícula");
+                System.out.println("Escolha o ID da matéria");
 
-                int registryId = scanner.nextInt();
+                List<Subject> registeredSubjects = loggedStudent.getRegisteredSubjects();
+                registeredSubjects.forEach(subject -> {
+                    if (subject.isInRegistryPeriod()) {
+                        System.out.println(
+                                ANSI_GREEN + subject.id + " - " + subject.name + ANSI_RESET);
+                    } else {
+                        System.out.println(
+                                ANSI_YELLOW + subject.id + " - " + subject.name + " (out of registry period)"
+                                        + ANSI_RESET);
+                    }
+                });
+
+                int registeredSubjectId = scanner.nextInt();
                 scanner.nextLine();
-                loggedStudent.cancelRegistry(registryId);
-                System.out.println("Registro cancelado");
+                try {
+                    loggedStudent.cancelRegistry(registeredSubjectId);
+                    System.out.println(ANSI_GREEN + "Registro cancelado com sucesso." + ANSI_RESET);
+                } catch (Exception err) {
+                    System.out.println(ANSI_RED + err.getMessage() + ANSI_RESET);
+                }
 
+                System.out.println("");
+                System.out.println("Pressione Enter para Voltar");
+                System.in.read();
+                break;
             case 3:
+                System.out.println("Minhas Matrículas:");
                 List<Registry> registries = loggedStudent.getRegistries();
 
                 registries.forEach(registry -> {
+                    Subject subject = Subject.getById(registry.subject_id);
                     System.out.println(
-                            "ID " + registry.id + " - " + registry.subject_id);
+                            ANSI_GREEN + "ID: " + subject.id + " | Nome: " + subject.name + ANSI_RESET
+                    );
                 });
-
+                System.out.println("");
+                System.out.println("Pressione Enter para Voltar");
+                System.in.read();
+                break;
+            case 6:
+                logOut();
+                break;
         }
     }
 
@@ -167,23 +202,32 @@ public class Main {
         }
     }
 
-    public static void teacherMenu(int option) {
+    public static void teacherMenu(int option) throws IOException {
         switch (option) {
             case 1:
+                System.out.println("Suas matérias lessionadas:");
                 List<Subject> givenSubjects = loggedTeacher.getGivenSubjects();
 
-                givenSubjects.forEach(subject -> {
-                    if (subject.isInRegistryPeriod()) {
-                        System.out.println(
-                                ANSI_GREEN + subject.id + " - " + subject.name + ANSI_RESET);
-                    } else {
-                        System.out.println(
-                                ANSI_YELLOW + subject.id + " - " + subject.name + " (fora do período de registro)"
-                                        + ANSI_RESET);
-                    }
+                givenSubjects.forEach(subject ->
+                    System.out.println(ANSI_GREEN + subject.id + " - " + subject.name + ANSI_RESET)
+                );
 
-                });
+                System.out.println("Selecione de qual das suas matérias você deseja listar os alunos:");
+                int subjectId = scanner.nextInt();
+                scanner.nextLine();
 
+                List<Student> students = loggedTeacher.getRegisteredStudents(subjectId);
+                students.forEach(subject ->
+                        System.out.println(ANSI_GREEN + subject.id + " - " + subject.name + ANSI_RESET)
+                );
+
+                System.out.println("");
+                System.out.println("Pressione Enter para Voltar");
+                System.in.read();
+                break;
+            case 6:
+                logOut();
+                break;
         }
     }
 

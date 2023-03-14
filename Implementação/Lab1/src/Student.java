@@ -15,17 +15,42 @@ public class Student extends User {
                 .toList().get(0);
     }
 
-    public void makeRegistry(int subject_id) {
-        int id = Database.Registries.get(Database.Users.size() - 1).id + 1;
+    public void makeRegistry(int subject_id) throws Exception {
+        Subject subject = Subject.getById(subject_id);
+        subject.addStudent(this.id);
+
+        int id = Database.Registries.get(Database.Registries.size() - 1).id + 1;
         Registry registry = new Registry(id, subject_id, this.id);
         Database.Registries.add(registry);
     }
 
-    public void cancelRegistry(int registry_id) {
+    public void cancelRegistry(int subject_id) throws Exception {
+        Subject subject = Subject.getById(subject_id);
+        Registry registry = Registry.getBySubjectAndStudentIds(subject_id, this.id);
+
+        subject.rmStudent(this.id);
+        int index = Database.Registries.indexOf(registry);
+        Database.Registries.remove(index);
     }
 
     public List<Subject> getSubjects(){
         return Database.Subjects;
+    }
+
+    public List<Subject> getRegisteredSubjects() {
+        List<Integer> registeredSubjects = this.getRegistries().stream()
+                .map(registry -> registry.subject_id).toList();
+
+        if (registeredSubjects.size() == 0) {
+            return List.of();
+        }
+
+        return Database.Subjects.stream().filter(subject -> {
+            if (registeredSubjects.contains(subject.id)) {
+                return true;
+            }
+            return false;
+        }).toList();
     }
 
     public List<Registry> getRegistries() {
@@ -43,7 +68,7 @@ public class Student extends User {
     }
 
     public boolean validateTotalRegistries() {
-        return true;
+        return this.getRegistries().size() <= 6;
     }
 
     public boolean validateOptionalRegistries() {
