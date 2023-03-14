@@ -24,6 +24,10 @@ public class Student extends User {
     public void cancelRegistry(int registry_id) {
     }
 
+    public List<Subject> getSubjects(){
+        return Database.Subjects;
+    }
+
     public List<Registry> getRegistries() {
         return Database.Registries.stream().filter(registry -> registry.student_id == this.id).toList();
     }

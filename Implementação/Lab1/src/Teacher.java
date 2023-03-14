@@ -13,7 +13,7 @@ public class Teacher extends User {
                 .toList().get(0);
     }
 
-    public List<Subject> getSubjects() {
+    public List<Subject> getGivenSubjects() {
         return Database.Subjects.stream().filter(subject -> subject.teacher == this.id).toList();
     }
 
@@ -28,5 +28,6 @@ public class Teacher extends User {
             return false;
         }).toList();
     }
+
 
 }
